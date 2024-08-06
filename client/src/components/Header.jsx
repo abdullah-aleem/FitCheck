@@ -1,19 +1,21 @@
 import addidaslogo from '../assets/Adidass.svg'
 import { Link } from 'react-router-dom'
 
+
 function Header() {
   return (
-    <div className='absolute left-0 top-0 h-20 w-full '>
-      <div className='bg-black w-full h-10 items-center flex justify-center'>
+    <>
+    <div className='absolute left-0 top-0 h-18 w-full flex flex-col bg-white'>
+      <div className='bg-black w-full py-2 items-center flex justify-center'>
         <p className='text-white text-sm'>Discount on Shopping of more than $200</p>
       </div>
-      <div className=' p-2 flex flex-row h-full justify-between  '>
+      <div className=' p-2 flex flex-row  justify-between  '>
         <Link to='/' className='mr-16'>
           <img src={addidaslogo} className='w-24 h-24 ' />
         </Link>
 
         <div className='flex flex-row gap-4 text-base items-end '>
-          <Link to='/' className='font-bold border-b-2 border-white hover:border-black'>
+          <Link to='/' className='font-bold border-b-2 border-white hover:border-black '>
             MEN
           </Link>
 
@@ -41,7 +43,7 @@ function Header() {
               className="w-full py-1 pr-10 pl-4 border bg-gray-200 text-sm focus:outline-none"
               placeholder="Search..."
             />
-            
+
             <div className="absolute inset-y-0 right-0 flex items-center pl-3 pointer-events-none cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -76,6 +78,10 @@ function Header() {
 
       </div>
     </div>
+    
+    
+    
+    </>
   )
 }
 
