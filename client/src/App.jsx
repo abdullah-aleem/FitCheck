@@ -4,7 +4,7 @@ import Layout from './Layout'
 import Home from './Home'
 import Products from './Products'
 import OtherProducts from './OtherProducts'
-
+import Product from './Product'
 
 function App() {
  
@@ -19,6 +19,7 @@ function App() {
         <Route path='/product/bts' element={<OtherProducts/>}/>
         <Route path='/product/sale' element={<OtherProducts/>}/>
         <Route path='/product/3stripes' element={<OtherProducts/>}/>
+        <Route path='/product/:id' element={<Product/>}/>
       </Route>
    </Routes>
     )
