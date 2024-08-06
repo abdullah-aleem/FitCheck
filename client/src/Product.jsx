@@ -1,11 +1,36 @@
+import {useContext} from 'react'
+import { UserContext } from './CartContext'
+
 
 function Product() {
+    const {cart,setCart}=useContext(UserContext)
+
   const product={
     "id": 1,
     "name": "Samba Classic Shoes",
     "price": "$90",
     "subcategory": "Orignals",
     
+  }
+  const handleClick=()=>{
+
+    for (let i = 0; i < cart.length; i++) {
+        console.log(cart[i].id, "====" ,product.id)
+        if (cart[i].id === product.id) {
+            let x=cart
+            x[i].pieces += 1
+            alert("Item added to cart")
+            setCart(x)
+            return
+        }
+       
+
+        
+    }
+    let y={"id":product.id,"name":product.name,"price":product.price,"pieces":1}
+    window.alert("Item added to cart")
+
+    setCart((prev)=>[...prev,y])
   }
     return (
     <div>
@@ -20,7 +45,7 @@ function Product() {
             <h3>{product.subcategory}</h3>
             </div>
             <div>
-            <button className="px-4 py-2 bg-yellow-400 inline-block">
+            <button className="px-4 py-2 bg-yellow-400 inline-block " onClick={handleClick}>
                 Add to Cart &rarr;
             </button>
             </div>
