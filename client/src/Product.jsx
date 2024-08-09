@@ -2,12 +2,14 @@ import {useContext} from 'react'
 import { UserContext } from './CartContext'
 
 
+
 function Product() {
     const {cart,setCart}=useContext(UserContext)
 
   const product={
     "id": 1,
     "name": "Samba Classic Shoes",
+    "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg",
     "price": "$90",
     "subcategory": "Orignals",
     
@@ -20,6 +22,7 @@ function Product() {
             let x=cart
             x[i].pieces += 1
             alert("Item added to cart")
+            console.log(cart)
             setCart(x)
             return
         }
@@ -27,7 +30,7 @@ function Product() {
 
         
     }
-    let y={"id":product.id,"name":product.name,"price":product.price,"pieces":1}
+    let y={"id":product.id,"name":product.name,"price":product.price,"pieces":1,"image":product.image}
     window.alert("Item added to cart")
 
     setCart((prev)=>[...prev,y])
