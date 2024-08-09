@@ -74,20 +74,22 @@ function Home() {
                 </div>
             </div>
             <div className=''>
-                <p className='text-4xl font-semibold py-10'>Still Interested?</p>
+                <p className='text-4xl font-semibold py-10 px-2'>Still Interested?</p>
                 <div className="overflow-x-auto mb-5 hide-scrollbar">
-                    <div className='grid  grid-flow-col gap-1 '>
+                    <div className='grid  grid-flow-col gap-1  px-2'>
                         {products.map((product, index) => {
                             return (
+                                <div key={index} className=' w-80 border-2 border-white hover:border-black group'>
+                                <Link to={`/product/${product.id}`}>
+                                    <div className='relative'>
+                                    <img src={product.image} className='object-cover w-full' />
+                                    <p className='absolute left-2 px-1 bottom-0 bg-white  group-hover:translate-y-[-0.25rem] transition-transform duration-950'> {product.price}</p>
 
-                                <div key={index} className='bg-gray-100 w-80'>
-                                    <Link to={`/product/${product.id}`}>
-                                        <img src={product.image} className='object-cover w-full' />
-                                        <p>{product.name}</p>
-                                        <p>{product.price}</p>
-                                        <p>{product.subcategory}</p>
-                                    </Link>
-                                </div>
+                                    </div>
+                                    <p className='text-md p-2 pb-1'>{product.name}</p>
+                                    <p className='text-gray-400 text-sm p-2 pb-4'>{product.subcategory}</p>   
+                                </Link>
+                            </div>
                             )
 
                         })}

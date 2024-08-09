@@ -8,6 +8,9 @@ export default {
     extend: {
       height:{
         "custom":"500px"
+      },
+      colors:{
+        "custom-white":"#eaeeef"
       }
     },
   },
