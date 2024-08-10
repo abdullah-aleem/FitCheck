@@ -30,6 +30,7 @@ function Cart() {
         console.log(temp)
     }
     return (
+    cart.length===0?<div className="flex justify-center text-5xl font-bold p-24">THEIR IS NOTHING IN YOUR BAG... </div>:    
     <div className=" flex ">
         
         <div className="flex flex-col items-center justify-center w-2/3">
@@ -78,7 +79,7 @@ function Cart() {
                     )
                     
                 })}
-            <pre>Amount to pay : { total}</pre>
+            <pre>Amount to pay : ${total}</pre>
             </div>
             <div>
             <button className="relative px-12 py-3 font-bold text-white bg-yellow-400 border-2 border-yello-400 ">
