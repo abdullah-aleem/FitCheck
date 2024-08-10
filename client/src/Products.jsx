@@ -128,7 +128,7 @@ function Products() {
                     
                     <p className='py-2'>SAMBA</p>
                     <p className='text-sm pb-2'>One show countless looks</p>
-                    <Link className="hover:underline">Shop Now</Link>
+                    <Link to={'/product/men/samba'} className="underline">Shop Now</Link>
                 </div>
                 <div className='   w-1/5     '>
                     <img className="w-full" src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_400,w_400/og_ss24_aug_samba_tc_m_d_f50fe2ead0.jpg" />

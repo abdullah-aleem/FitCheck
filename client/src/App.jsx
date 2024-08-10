@@ -25,6 +25,7 @@ function App() {
         <Route path='/product/3stripes' element={<OtherProducts/>}/>
         <Route path='/product/:id' element={<Product/>}/>
         <Route path='/cart' element={<Cart/>}/>
+        <Route path='/product/men/:product' element={<OtherProducts/>}/>
       </Route>
    </Routes>
    </UserContextProvider>
