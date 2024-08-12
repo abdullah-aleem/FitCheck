@@ -36,6 +36,7 @@ app.get("/", (req, res) => {
 
 app.post("/add", (req, res) => {
     console.log(req.body)
+    
     res.send("Hello World!");
 
 });

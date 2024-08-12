@@ -22,7 +22,7 @@ function Header() {
           <Link to='/product/women' className='font-bold border-b-2 border-white hover:border-black'>
             WOMEN
           </Link>
-          <Link className='font-bold border-b-2 border-white hover:border-black'>
+          <Link to="/product/kids"className='font-bold border-b-2 border-white hover:border-black'>
             KIDS
           </Link>
           <Link to='/product/kids' className='font-bold border-b-2 border-white hover:border-black'>

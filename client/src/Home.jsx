@@ -75,11 +75,11 @@ function Home() {
             </div>
             <div className=''>
                 <p className='text-4xl font-semibold py-10 px-2'>Still Interested?</p>
-                <div className="overflow-x-auto mb-5 hide-scrollbar">
+                <div className="overflow-x-auto overflow-y-visible mb-5 hide-scrollbar py-4">
                     <div className='grid  grid-flow-col gap-1  px-2'>
                         {products.map((product, index) => {
                             return (
-                                <div key={index} className=' w-80 border-2 border-white hover:border-black group'>
+                                <div key={index} className='w-80 border-2 border-white hover:border-black group transform hover:scale-105 duration-300 transition-transform hover:z-10'>
                                 <Link to={`/product/${product.id}`}>
                                     <div className='relative'>
                                     <img src={product.image} className='object-cover w-full' />
