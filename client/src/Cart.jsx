@@ -7,13 +7,27 @@ function Cart() {
    
     
     useEffect(()=>{
+        window.scrollTo(0, 0)
         let sum=0;
         cart.map(x=>{
-            sum=sum+parseFloat(x.price.substring(1))*parseFloat(x.pieces)
+            sum=sum+parseFloat(x.price)*parseFloat(x.pieces)
         })
         setTotal(sum)
     },[cart])
+    const checkout=()=>{
+        fetch("http://localhost:3000/checkout", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                cart:cart
+            }),
+        }).then(x=>{return x.json()}).then(y=>{
+            alert(y)
+        })
     
+    }
     function addPiece(item){
         let temp=cart.map(x=>{
             console.log(item ,"===",cart)
@@ -73,7 +87,7 @@ function Cart() {
                     return(
                         <div key={x.id}>
                         
-                        <pre>{x.name}     {x.price} * {x.pieces} =   ${parseFloat(x.price.substring(1) )*parseFloat(x.pieces)}</pre>
+                        <pre>{x.name}     {x.price} * {x.pieces} =   ${parseFloat(x.price )*parseFloat(x.pieces)}</pre>
                       
                     </div>
                     )
@@ -84,7 +98,7 @@ function Cart() {
             <div>
             <button className="relative px-12 py-3 font-bold text-white bg-yellow-400 border-2 border-yello-400 ">
                     <span className="absolute inset-0 w-full h-full border-2 bg-transparent  border-yellow-400 transform translate-x-2 translate-y-2"></span>
-                    <span className="relative  hover:text-gray-500 text-black">CHECKOUT &rarr;</span>
+                    <span className="relative  hover:text-gray-500 text-black" onClick={checkout()}>CHECKOUT &rarr;</span>
                 </button>
             </div>
             </div>

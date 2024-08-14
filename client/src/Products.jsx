@@ -6,7 +6,7 @@ function Products() {
   const location = useLocation();
   const pathname = location.pathname;
   const lastPart = pathname.substring(pathname.lastIndexOf('/') + 1);
-
+  const [products,setProducts]=useState([])
   const categories={"men":{
     mainImage:"https://brand.assets.adidas.com/video/upload/f_auto:video,q_auto/if_w_gt_1920,w_1920/promo_fw24_bts_50_off_bh_d_60a60c9be4.mp4",
     subcategories:[{name:"SNEAKERS",image:"https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/87230f49c8554e09a7149063590c89ca_9366/sambae-shoes.jpg"},{name:"TOPS",image:"https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/e9c3b5e60e9d4c0086406fb28e069c36_9366/marvel-graphic-tee.jpg"},{name:"HOODIES & SWEATSHIRTS",image:"https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/f4d908c6409a45f7888819b03e132a4d_9366/trefoil-essentials-hoodie.jpg"},{name:"PANTS",image:"https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/98e90ef91aff468b91d363d2366c7279_9366/tiro-24-training-pants.jpg"}],
@@ -110,7 +110,7 @@ function Products() {
 
   const [detail,setDetail]=useState(categories["men"])
 
-
+  
   useEffect(() => {
     console.log(lastPart)   
     if(lastPart==="men"){
@@ -120,67 +120,40 @@ function Products() {
         setDetail(categories["women"])
     }else if(lastPart==="kids"){
         setDetail(categories["kids"])
+
     }
+
+    fetch("http://localhost:3000/getProducts", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: 'John Doe',
+          age: 30,
+        }),
+      })
+      .then(response => {
+        // Check if the response is okay
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        // Parse the JSON from the response
+        return response.json();
+      })
+      .then(data => {
+        // Here you can log the actual data returned from the server
+        console.log("These are the products:", data);
+        setProducts(data)
+      })
+      .catch(error => {
+        // Handle any errors that occur
+        console.error("There was a problem with the fetch operation:", error);
+      });
+    
   },[lastPart]);
 
-  const products = [
-    {
-        "id": 1,
-        "name": "Samba Classic Shoes",
-        "price": "$90",
-        "subcategory": "Orignals",
-        "gender": "male",
-        "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-    },
-    {
-        "id": 1,
-        "name": "Samba Classic Shoes",
-        "price": "$90",
-        "subcategory": "Orignals",
-        "gender": "male",
-        "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-    },
-    {
-        "id": 1,
-        "name": "Samba Classic Shoes",
-        "price": "$90",
-        "subcategory": "Orignals",
-        "gender": "male",
-        "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-    },
-    {
-        "id": 1,
-        "name": "Samba Classic Shoes",
-        "price": "$90",
-        "subcategory": "Orignals",
-        "gender": "male",
-        "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-    },
-    {
-        "id": 1,
-        "name": "Samba Classic Shoes",
-        "price": "$90",
-        "subcategory": "Orignals",
-        "gender": "male",
-        "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-    },
-    {
-        "id": 1,
-        "name": "Samba Classic Shoes",
-        "price": "$90",
-        "subcategory": "Orignals",
-        "gender": "male",
-        "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-    },
-    {
-        "id": 1,
-        "name": "Samba Classic Shoes",
-        "price": "$90",
-        "subcategory": "Orignals",
-        "gender": "male",
-        "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-    },
-]
+  
   return (
     <div className="w-full flex flex-col">
             <div className='object-contain relative'>
@@ -203,30 +176,30 @@ function Products() {
                 </div>
             </div>
             <div className='flex  gap-6 justify-center pt-16 pb-8'>
-                <div className=' bg-custom-white flex justify-center items-center w-1/5  flex-col    '>
+                <Link to={"/product/"+lastPart+"/"+detail.subcategories[0].name} className=' bg-custom-white flex justify-center items-center w-1/5  flex-col    '>
                     <img className="object-contain h-52 " src={detail.subcategories[0].image} />
                     <p className='underline py-4 text-sm'>
                         {detail.subcategories[0].name}
                     </p>
-                </div>
-                <div className=' bg-custom-white flex justify-center items-center w-1/5  flex-col    '>
+                </Link>
+                <Link to={"/product/"+lastPart+"/"+detail.subcategories[1].name} className=' bg-custom-white flex justify-center items-center w-1/5  flex-col    '>
                     <img className="object-contain h-52 " src={detail.subcategories[1].image} />
                     <p className='underline py-4 text-sm'>
                         {detail.subcategories[1].name}
                     </p>
-                </div>
-                <div className=' bg-custom-white flex justify-center items-center w-1/5  flex-col    '>
+                </Link>
+                <Link to={"/product/"+lastPart+"/"+detail.subcategories[2].name} className=' bg-custom-white flex justify-center items-center w-1/5  flex-col    '>
                     <img className="object-contain h-52 " src={detail.subcategories[2].image} />
                     <p className='underline py-4 text-sm'>
                         {detail.subcategories[2].name}
                     </p>
-                </div>
-                <div className=' bg-custom-white flex justify-center items-center w-1/5  flex-col    '>
+                </Link>
+                <Link to={"/product/"+lastPart+"/"+detail.subcategories[3].name} className=' bg-custom-white flex justify-center items-center w-1/5  flex-col    '>
                     <img className="object-contain h-52 " src={detail.subcategories[3].image} />
                     <p className='underline py-4 text-sm'>
                         {detail.subcategories[3].name}
                     </p>
-                </div>
+                </Link>
                
             </div>
             <div className='flex gap-2 justify-center py-2  '>
@@ -235,7 +208,7 @@ function Products() {
                     
                     <p className='py-2'>{detail.subPages[0].name}</p>
                     <p className='text-sm pb-2'>{detail.subPages[0].description}</p>
-                    <Link className='underline '>Shop Now</Link>
+                    <Link className='underline ' to={"/product/"+lastPart+"/"+detail.subPages[0].name}>Shop Now</Link>
                 </div>
                 <div className='   w-1/5     '>
                 <video 
@@ -248,36 +221,36 @@ function Products() {
       />
                     <p className='py-2'>{detail.subPages[1].name}</p>
                     <p className='text-sm pb-2'>{detail.subPages[1].description}</p>
-                    <Link className='underline '>Shop Now</Link>
+                    <Link className='underline ' to={"/product/"+lastPart+"/"+detail.subPages[1].name}>Shop Now</Link>
                 </div>
                 <div className='   w-1/5     '>
                     <img className="w-full" src={detail.subPages[2].image} />
                     
                     <p className='py-2'>{detail.subPages[2].name}</p>
                     <p className='text-sm pb-2'>{detail.subPages[2].description}</p>
-                    <Link className='underline '>Shop Now</Link>
+                    <Link className='underline ' to={"/product/"+lastPart+"/"+detail.subPages[2].name}>Shop Now</Link>
                 </div>
                 <div className='   w-1/5     '>
                     <img className="w-full" src={detail.subPages[3].image} />
                     
                     <p className='py-2'>{detail.subPages[3].name}</p>
                     <p className='text-sm pb-2'>{detail.subPages[3].description}</p>
-                    <Link className='underline '>Shop Now</Link>
+                    <Link className='underline ' to={"/product/"+lastPart+"/"+detail.subPages[3].name}>Shop Now</Link>
                 </div>
                
             </div>
             <div className=''>
                 <p className='text-4xl  py-10 px-4'>Top Picks For You...</p>
                 <div className="overflow-x-auto mb-5 hide-scrollbar ">
-                    <div className='grid  grid-flow-col gap-1 px-2 py-4'>
+                    <div className='grid  grid-flow-col auto-cols-max px-2 py-4 container'>
                         {products.map((product, index) => {
                             return (
 
                                 <div key={index} className=' w-80 border-2 border-white hover:border-black group transform hover:scale-105 duration-300 transition-transform hover:z-10'>
-                                    <Link to={`/product/${product.id}`}>
+                                    <Link to={`/product/${product._id}`}>
                                         <div className='relative'>
                                         <img src={product.image} className='object-cover w-full' />
-                                        <p className='absolute left-2 px-1 bottom-0 bg-white  group-hover:translate-y-[-0.25rem] transition-transform duration-950'> {product.price}</p>
+                                        <p className='absolute left-2 px-1 bottom-0 bg-white  group-hover:translate-y-[-0.25rem] transition-transform duration-950'> ${product.price}</p>
 
                                         </div>
                                         <p className='text-md p-2 pb-1'>{product.name}</p>

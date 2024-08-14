@@ -4,7 +4,8 @@ const port = 3000;
 const mongoose = require('mongoose');
 const cors=require('cors');
 require('dotenv').config();
-
+const Product=require('./models/Product.js')
+const Category=require('./models/Category.js')
 //middleware
 app.use(cors({
     credentials:true,  
@@ -17,7 +18,7 @@ const connectToDatabase = ()=>{
     mongoose.connect(process.env.MONGO_URL).then(()=>{
         console.log('connected to server')
     }).catch((err)=>{
-        console.error("cannot connect to mongo dp")
+        console.error(err)
         setTimeout(connectToDatabase,5000) 
     })
 }
@@ -34,21 +35,50 @@ app.get("/", (req, res) => {
 
 });
 
-app.post("/add", (req, res) => {
+app.post("/addProduct",async (req, res) => {
     console.log(req.body)
-    
-    res.send("Hello World!");
+     Product.create(req.body).then((product)=>{
+        res.json(product)
+     })
 
 });
 
+app.post("/addCategory",async (req, res) => {
+    console.log(req.body)
+     Category.create(req.body).then((product)=>{
+        res.json(product)
+     })
+
+});
+app.post("/getProducts",async (req, res) => {
+    Product.find().then((products)=>{
+        res.json(products)
+    })
+});
+app.post("/getSingleProduct",async (req, res) => {
+    console.log(req.body)
+    Product.findById(req.body._id).then((product)=>{
+        console.log(product)
+        res.json(product)
+    })
+})
 
 
 
+app.post("/getCategories",async (req, res) => {
+    console.log(req.body)
+    Category.find().then((products)=>{
+        
+        res.json(products)
+        console.log(products)
+    })
+})
 
 
-
-
-
+app.post("/checkout",async (req, res) => {
+    console.log(req.body)
+    res.json("redirect to Stripe")
+})
 
 
 

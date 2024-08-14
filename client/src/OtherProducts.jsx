@@ -1,6 +1,37 @@
+import { useEffect } from "react"
 import { Link } from "react-router-dom"
-
+import { useState} from "react"
 function OtherProducts() {
+    const [categories,setCategories]=useState([{name:""}])
+    useEffect(()=>{
+        fetch("http://localhost:3000/getCategories", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name:"",
+            }),
+          })
+          .then(response => {
+            // Check if the response is okay
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            // Parse the JSON from the response
+            return response.json();
+          })
+          .then(data => {
+            // Here you can log the actual data returned from the server
+            console.log("These are the products:", data);
+            setCategories(data)
+          })
+          .catch(error => {
+            // Handle any errors that occur
+            console.error("There was a problem with the fetch operation:", error);
+          });
+    }
+    ,[])
   const products = [
     {
         "id": 1,
@@ -62,8 +93,8 @@ function OtherProducts() {
   return (
     <div className="flex flex-col pt-4 w-5/6 m-auto ">
       <div className="pb-10">
-        <p className="text-3xl italic font-thin">SAMBA SHOES</p>
-        <p className="text-base w-1/2 ">On the turf. In the pedals. Rolling from the skatepark to the city. Men&apos;s adidas Samba shoes dance between sports, defying categories and defining street style.</p>
+        <p className="text-3xl italic font-thin">{categories[0].name}</p>
+        <p className="text-base w-1/2 ">{categories[0].desc}</p>
       </div>
       <div className="border-2 grid grid-cols-1 md:grid-cols-5">
       {products.map((product, index) => {

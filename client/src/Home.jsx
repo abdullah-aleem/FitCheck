@@ -1,68 +1,45 @@
-import home from './assets/home.png'
+
+import { useEffect,useState } from 'react'
 import { Link } from 'react-router-dom'
 function Home() {
-    const products = [
-        {
-            "id": 1,
-            "name": "Samba Classic Shoes",
-            "price": "$90",
-            "subcategory": "Orignals",
-            "gender": "male",
-            "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-        },
-        {
-            "id": 1,
-            "name": "Samba Classic Shoes",
-            "price": "$90",
-            "subcategory": "Orignals",
-            "gender": "male",
-            "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-        },
-        {
-            "id": 1,
-            "name": "Samba Classic Shoes",
-            "price": "$90",
-            "subcategory": "Orignals",
-            "gender": "male",
-            "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-        },
-        {
-            "id": 1,
-            "name": "Samba Classic Shoes",
-            "price": "$90",
-            "subcategory": "Orignals",
-            "gender": "male",
-            "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-        },
-        {
-            "id": 1,
-            "name": "Samba Classic Shoes",
-            "price": "$90",
-            "subcategory": "Orignals",
-            "gender": "male",
-            "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-        },
-        {
-            "id": 1,
-            "name": "Samba Classic Shoes",
-            "price": "$90",
-            "subcategory": "Orignals",
-            "gender": "male",
-            "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-        },
-        {
-            "id": 1,
-            "name": "Samba Classic Shoes",
-            "price": "$90",
-            "subcategory": "Orignals",
-            "gender": "male",
-            "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/cc3416c01bff48249f77a7fd012dd9fd_9366/Samba_Classic_Shoes_White_772109_01_standard.jpg"
-        },
-    ]
+    const [product,setProduct]=useState([])
+    useEffect(()=>{
+        fetch("http://localhost:3000/getProducts", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            // Check if the response is okay
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // Parse the JSON from the response
+            return response.json();
+        })
+        .then(data => {
+            // Here you can log the actual data returned from the server
+            console.log("These are the products:", data);
+            setProduct(data)
+        })
+        .catch(error => {
+            // Handle any errors that occur
+            console.error("There was a problem with the fetch operation:", error);
+        });
+    },[])
+   
     return (
         <div className="w-full flex flex-col">
             <div className='object-contain relative'>
-                <img src={home} className='object-cover w-full' />
+            <video 
+        src="https://brand.assets.adidas.com/video/upload/f_auto:video,q_auto/if_w_gt_1920,w_1920/promo_fw24_bts_50_off_bh_d_60a60c9be4.mp4" // Replace with the correct video path
+        className="object-cover w-full"
+        autoPlay 
+        loop 
+        muted 
+        playsInline // Ensures the video plays inline on mobile devices
+      />
                 <div className='absolute left-12 bottom-12'>
                     <h1 className='text-4xl font-bold text-white mb-8'>BACK TO SCHOOL</h1>
                     <p className='text-white mb-8'>From shoes to tees to backpacks,these <br /> these styles are ready for your first day back.</p>
@@ -76,18 +53,18 @@ function Home() {
             <div className=''>
                 <p className='text-4xl font-semibold py-10 px-2'>Still Interested?</p>
                 <div className="overflow-x-auto overflow-y-visible mb-5 hide-scrollbar py-4">
-                    <div className='grid  grid-flow-col gap-1  px-2'>
-                        {products.map((product, index) => {
+                    <div className='grid  grid-flow-col gap-1 auto-cols-max  px-2'>
+                        {product.map((product, index) => {
                             return (
                                 <div key={index} className='w-80 border-2 border-white hover:border-black group transform hover:scale-105 duration-300 transition-transform hover:z-10'>
-                                <Link to={`/product/${product.id}`}>
+                                <Link to={`/product/${product._id}`}>
                                     <div className='relative'>
                                     <img src={product.image} className='object-cover w-full' />
-                                    <p className='absolute left-2 px-1 bottom-0 bg-white  group-hover:translate-y-[-0.25rem] transition-transform duration-950'> {product.price}</p>
+                                    <p className='absolute left-2 px-1 bottom-0 bg-white  group-hover:translate-y-[-0.25rem] transition-transform duration-950'> ${product.price}</p>
 
                                     </div>
                                     <p className='text-md p-2 pb-1'>{product.name}</p>
-                                    <p className='text-gray-400 text-sm p-2 pb-4'>{product.subcategory}</p>   
+                                    <p className='text-gray-400 text-sm p-2 pb-4'>{product.subCategory}</p>   
                                 </Link>
                             </div>
                             )

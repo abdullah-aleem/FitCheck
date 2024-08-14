@@ -1,9 +1,10 @@
 
 const mongoose=require('mongoose');
+const { required } = require('nodemon/lib/config');
 const {Schema}=mongoose
 //create Schema
 const ProductSchema=new Schema({
-    id:{type:String,unique:true},
+    
     name:String,
     subCategory:String,
     price:Number,
