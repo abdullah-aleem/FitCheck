@@ -6,7 +6,7 @@ const cors=require('cors');
 require('dotenv').config();
 const Product=require('./models/Product.js')
 const Category=require('./models/Category.js')
-//middleware
+//middleware 
 app.use(cors({
     credentials:true,  
     origin:'http://localhost:5173'
@@ -29,7 +29,7 @@ connectToDatabase();
 
 
 
-//routes
+//routes 
 app.get("/", (req, res) => {
     res.send("Hello World!");
 
@@ -39,7 +39,9 @@ app.post("/addProduct",async (req, res) => {
     console.log(req.body)
      Product.create(req.body).then((product)=>{
         res.json(product)
-     })
+     }).catch((err)=>{
+        console.log(err)
+        res.status(202).json("some problem with the server")})
 
 });
 
@@ -47,12 +49,17 @@ app.post("/addCategory",async (req, res) => {
     console.log(req.body)
      Category.create(req.body).then((product)=>{
         res.json(product)
-     })
+     }).catch((err)=>{
+        console.log(err)
+        res.status(202).json("some problem with the server")})
 
 });
 app.post("/getProducts",async (req, res) => {
     Product.find().then((products)=>{
         res.json(products)
+    }).catch((err)=>{
+        console.log(err)
+        res.status(202).json("some problem with the server")
     })
 });
 app.post("/getSingleProduct",async (req, res) => {
@@ -60,6 +67,9 @@ app.post("/getSingleProduct",async (req, res) => {
     Product.findById(req.body._id).then((product)=>{
         console.log(product)
         res.json(product)
+    }).catch((err)=>{
+        console.log(err)
+        res.status(202).json("some problem with the server")
     })
 })
 
@@ -71,6 +81,9 @@ app.post("/getCategories",async (req, res) => {
         
         res.json(products)
         console.log(products)
+    }).catch((err)=>{   
+        console.log(err)
+        res.status(202).json("some problem with the server")
     })
 })
 

@@ -31,9 +31,24 @@ function Cart() {
     function addPiece(item){
         let temp=cart.map(x=>{
             console.log(item ,"===",cart)
-            if (item==x){
+            if (item==x && item.pieces<=item.inventory){
                 console.log("hello")
                 x.pieces=x.pieces+1;
+                return x
+            }else{
+                return x
+            }
+             
+        })
+        setCart(temp)
+        console.log(temp)
+    }
+    function subtractPiece(item){
+        let temp=cart.map(x=>{
+            console.log(item ,"===",cart)
+            if (item==x && x.pieces>1){
+                console.log("hello")
+                x.pieces=x.pieces-1;
                 return x
             }else{
                 return x
@@ -66,7 +81,9 @@ function Cart() {
                                 
                                 addPiece(item))}>+</button>
                             <span>{item.pieces}</span>
-                            <button className="bg-yellow-400 px-2 m-4 ">−</button>
+                            <button className="bg-yellow-400 px-2 m-4 " onClick={()=>{
+                                subtractPiece(item)
+                            }}>−</button>
                         </div>
                         </div>
                     </div>
@@ -98,7 +115,7 @@ function Cart() {
             <div>
             <button className="relative px-12 py-3 font-bold text-white bg-yellow-400 border-2 border-yello-400 ">
                     <span className="absolute inset-0 w-full h-full border-2 bg-transparent  border-yellow-400 transform translate-x-2 translate-y-2"></span>
-                    <span className="relative  hover:text-gray-500 text-black" onClick={checkout()}>CHECKOUT &rarr;</span>
+                    <span className="relative  hover:text-gray-500 text-black" onClick={()=>checkout()}>CHECKOUT &rarr;</span>
                 </button>
             </div>
             </div>
