@@ -6,7 +6,7 @@ function Layout() {
   return (
    <>
     <Header/>
-    <div className='mt-40 '>
+    <div className='mt-16 lg:mt-40 '>
     <Outlet/>
     </div>
     <Footer/>
