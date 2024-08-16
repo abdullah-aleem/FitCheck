@@ -169,9 +169,9 @@ function Products() {
                     <h1 className='text-4xl font-bold text-white mb-8'>BACK TO SCHOOL</h1>
                     <p className='text-white mb-8'>From shoes to tees to backpacks,these <br /> these styles are ready for your first day back.</p>
                     <div className='flex gap-2'>
-                        <button className='bg-white px-3 py-1 border-black border hover:text-gray-500'> SHOP MEN  &rarr;</button>
-                        <button className='bg-white px-3 py-1 border-black border hover:text-gray-500'> SHOP WOMEN  &rarr;</button>
-                        <button className='bg-white px-3 py-1 border-black border hover:text-gray-500'> SHOP KIDS  &rarr;</button>
+                        <Link to="/product/men" className='bg-white px-3 py-1 border-black border hover:text-gray-500'> SHOP MEN  &rarr;</Link>
+                        <Link to="/product/women"className='bg-white px-3 py-1 border-black border hover:text-gray-500'> SHOP WOMEN  &rarr;</Link>
+                        <Link to="/product/kids"className='bg-white px-3 py-1 border-black border hover:text-gray-500'> SHOP KIDS  &rarr;</Link>
                     </div>
                 </div>
             </div>
