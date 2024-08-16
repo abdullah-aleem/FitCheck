@@ -46,7 +46,7 @@ function Header() {
 
       </div>
       <div className='hidden lg:flex absolute left-0 top-0 h-18 w-full  flex-col bg-white'>
-        <div className='bg-black w-full py-2 items-center flex justify-center'>
+        <div className='bg-black w-full py-4 items-center flex justify-center'>
           <p className='text-white text-sm'>Discount on Shopping of more than $200</p>
         </div>
         <div className=' p-2 flex flex-row  justify-between  '>
@@ -119,15 +119,42 @@ function Header() {
         </div>
       </div>
 
-      <div className={`fixed top-0 left-0 z-10 h-full w-full bg-white transform transition-transform duration-300 ${showmenu ? 'translate-x-0' : '-translate-x-full'
+      <div className={`lg:hidden fixed top-0 left-0 z-10 h-full w-full bg-white transform transition-transform duration-300 ${showmenu ? 'translate-x-0' : '-translate-x-full'
         }`}>
-        <button className='absolute top-4 right-4 ' onClick={() => { setShowMenu(false) }}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-        <div className=''>
+        <div className='border-b relative top-0 right-0 w-full h-16'>
+          <button className='absolute right-0 top-0 p-4' onClick={() => { setShowMenu(false) }}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+          </button>
+          <div className='w-full flex item justify-center'>
+            <img src={addidaslogo} className='w-20 h-16 ' />
+          </div>
+        </div>
+        <div className='flex flex-col gap-2 justify-start h-full'>
+          <div className='flex flex-col border-b '>
+            <div className='w-full py-4 px-8'>
+              <Link to='/product/men' className='font-bold text-lg '>MEN</Link>
+
+            </div>
+            <div  className='w-full py-4 px-8'>
+
+              <Link to='/product/men' className='font-bold text-lg  '>WOMEN</Link>
+            </div>
+            <div  className='w-full py-4 px-8'>
+              <Link to='/product/men' className='font-bold text-lg '>KIDS</Link>
+
+            </div>
+            <div  className='w-full py-4 px-8'>
+              <Link to='/product/men' className=' text-lg  '>BACK TO SCHOOL</Link>
+
+            </div>
+            <div  className='w-full py-4 px-8'>
+              <Link to='/product/men' className=' text-lg '>SALE</Link>
+
+            </div>
+          </div>
 
         </div>
-        </button>
 
       </div>
 
