@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import addidaslogo from '../assets/Adidass.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 function Header() {
   const [showmenu, setShowMenu] = useState(false)
+  const navigate=useNavigate()
+  const handleClick=(x)=>{
+    setShowMenu(false)
+    navigate(x)
+  }
   return (
     <>
 
@@ -55,7 +60,7 @@ function Header() {
           </Link>
 
           <div className='flex flex-row gap-2 lg:gap-4 text-sm lg:text-base items-end '>
-            <Link to='/product/men' className='font-bold border-b-2 border-white hover:border-black '>
+            <Link onClick={()=>{handleClick("product/men")}} className='font-bold border-b-2 border-white hover:border-black '>
               MEN
             </Link>
 
@@ -133,23 +138,23 @@ function Header() {
         <div className='flex flex-col gap-2 justify-start h-full'>
           <div className='flex flex-col border-b '>
             <div className='w-full py-4 px-8'>
-              <Link to='/product/men' className='font-bold text-lg '>MEN</Link>
+              <button onClick={()=>{handleClick("product/men")}} className='font-bold text-lg '>MEN</button>
 
             </div>
             <div  className='w-full py-4 px-8'>
 
-              <Link to='/product/men' className='font-bold text-lg  '>WOMEN</Link>
+              <button onClick={()=>{handleClick("product/women")}} className='font-bold text-lg  '>WOMEN</button>
             </div>
             <div  className='w-full py-4 px-8'>
-              <Link to='/product/men' className='font-bold text-lg '>KIDS</Link>
+              <button onClick={()=>{handleClick("product/kids")}} className='font-bold text-lg '>KIDS</button>
 
             </div>
             <div  className='w-full py-4 px-8'>
-              <Link to='/product/men' className=' text-lg  '>BACK TO SCHOOL</Link>
+              <button onClick={()=>{handleClick("product/backtoschool")}} className=' text-lg  '>BACK TO SCHOOL</button>
 
             </div>
             <div  className='w-full py-4 px-8'>
-              <Link to='/product/men' className=' text-lg '>SALE</Link>
+              <Link onClick={()=>{handleClick("product/sale")}} className=' text-lg '>SALE</Link>
 
             </div>
           </div>
